@@ -10,7 +10,7 @@
             Console.WriteLine($" {account1.Owner} {account1.Balance} {account1.Number}");
             Console.WriteLine($" {account2.Owner} {account2.Balance} {account2.Number}");
             account1.MakeDeposite(12000, DateTime.UtcNow, ";)");
-            Console.WriteLine($"Balance: {account1.Balance}");
+            Console.WriteLine($"Balance:  {account1.Balance}");
             account1.MakeWithdrawal(123, DateTime.UtcNow, ":(");
             Console.WriteLine($"Balance: {account1.Balance}");
 
