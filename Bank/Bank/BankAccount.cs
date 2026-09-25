@@ -1,4 +1,5 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Bank;
 
@@ -39,7 +40,21 @@ internal class BankAccount
         var deposite = new Transaction(amout, date, note);
         _allTransactions.Add(deposite);
     }
+    public string GetAccountHistory()
+    {
+        var report = new StringBuilder();
 
+        decimal balance = 0;
+        report.AppendLine("Data\t\tAmount\tBalance\tNote");
+        foreach (var item in _allTransactions)
+        {
+            balance += item.Amount;
+            report.AppendLine($"" + 
+                $"{item.Date.ToShortDateString()}\t" + 
+                $"{item.Amount}\t{balance}\t{item.Note}");
+        }
+        return report.ToString();
+    }
     public void MakeWithdrawal(decimal amout, DateTime date, string note)
     {
         if (amout <= 0)
