@@ -29,7 +29,7 @@
 
             LineOfCreditAccount lineOfCredit = new LineOfCreditAccount("Mimi", 0, 1000m);
             lineOfCredit.MakeWithdrawal(500m, DateTime.UtcNow, "credit");
-            GiftCartAccount giftcart = new GiftCartAccount("Mimi", 1000m, 5000m);
+            GiftCardAccount giftcart = new GiftCardAccount("Mimi", 1000m, 5000m);
 
 
             List<BankAccount> accounts = new List<BankAccount>();
@@ -46,6 +46,12 @@
             }
             lineOfCredit.MakeWithdrawal(600m, DateTime.UtcNow, "credit");
             Console.WriteLine(lineOfCredit.GetAccountHistory());
+
+            // === Проверка задачи 1: статусы ===
+
+            var regular = new BankAccount("Иван", 5000m);
+            regular.PerformMonthAndTransactions();
+            Console.WriteLine($"Regular: баланс = {regular.Balance}");   // ожидаем 4950
         }
     }
 }

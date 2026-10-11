@@ -1,7 +1,13 @@
 ﻿using System.Text;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Bank;
+/// <summary>
+/// Статус клиента банка. Определяет условие ежемесячного обслуживания счета
+/// </summary>
+public enum ClientStatus
+{
+    Regular, Premium, VIP
+}
 /// <summary>
 /// Банковский счет, хранящий историю транзакций и баланс
 /// </summary>
@@ -19,7 +25,7 @@ public class BankAccount
     /// </summary>
     public string Number { get; }
     /// <summary>
-    /// Текущий баланс, вычисляемый ак сумма транзакций
+    /// Текущий баланс, вычисляемый как сумма транзакций
     /// </summary>
     public decimal Balance 
     {
@@ -33,47 +39,70 @@ public class BankAccount
             return balance;
         }
     }
+    /// <summary>
+    /// Статус клиента банка. Определяет условия ежемесячного обслуживания.
+    /// </summary>
+    public ClientStatus Status { get; private set;  }
     private static int s_accountNumberSeed = 1000000000;
     /// <summary>
     /// Конструктор класса. Создаёт счёт с нулевым минимальным балансом.
     /// </summary>
     /// <param name="name">Имя владельца</param>
     /// <param name="initialBalance">Начальный баланс</param>
-    public BankAccount(string name, decimal initialBalance):this(name, initialBalance, 0)
+    public BankAccount(string name, decimal initialBalance):this(name, initialBalance, 0, ClientStatus.Regular)
     {
-
     }
     /// <summary>
-    /// Конструктор класса. Создаёт счёт с заданным минимальным балансом.
+    /// Конструктор класса. Создаёт счёт с заданным минимальным балансом и статусом Regular.
     /// </summary>
     /// <param name="name">Имя владельца</param>
     /// <param name="initialBalance">Начальный баланс</param>
-    /// <param name="minimumBBalance">Минимальный баланс</param>
-    public BankAccount(string name, decimal initialBalance, decimal minimumBBalance)
+    /// <param name="minimumBalance">Минимальный баланс</param>
+    public BankAccount(string name, decimal initialBalance, decimal minimumBalance) : this(name, initialBalance, minimumBalance, ClientStatus.Regular)
+    {
+    }
+    /// <summary>
+    /// Конструктор класса. Создаёт счёт с заданным минимальным балансом и заданным статусом клиента.
+    /// </summary>
+    /// <param name="name">Имя владельца</param>
+    /// <param name="initialBalance">Начальный баланс</param>
+    /// <param name="minimumBalance">Минимальный баланс</param>
+    /// <param name="status">Статус клиента банка</param>
+    public BankAccount(string name, decimal initialBalance, decimal minimumBalance, ClientStatus status)
     {
         Owner = name;
 
         Number = s_accountNumberSeed.ToString();
         s_accountNumberSeed++;
 
-        _minimumBalance = minimumBBalance;
+        _minimumBalance = minimumBalance;
+        Status = status;
         if (initialBalance > 0)
             MakeDeposite(initialBalance, DateTime.UtcNow, "initial balance");
     }
     /// <summary>
+    /// Метод, который меняет статус клиента
+    /// </summary>
+    /// <param name="status">Новый статус клиента</param>
+    public void ChangeStatus(ClientStatus status)
+    {
+        Status = status;
+    }
+
+    /// <summary>
     /// Метод, который пополняет счёт на указанную сумму.
     /// </summary>
-    /// <param name="amout">Сумма пополнения</param>
+    /// <param name="amount">Сумма пополнения</param>
     /// <param name="date">Дата пополнения</param>
     /// <param name="note">Комментарий к операции</param>
-    /// <exception cref="ArgumentOutOfRangeException">Исключение, если сумма пополения отрицательная</exception>
-    public void MakeDeposite(decimal amout, DateTime date, string note)
+    /// <exception cref="ArgumentOutOfRangeException">Исключение, если сумма пополнения отрицательная</exception>
+    public void MakeDeposite(decimal amount, DateTime date, string note)
     {
-        if (amout <= 0)
+        if (amount <= 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(amout), "Amount must be positive");
+            throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be positive");
         }
-        var deposite = new Transaction(amout, date, note);
+        var deposite = new Transaction(amount, date, note);
         _allTransactions.Add(deposite);
     }
     /// <summary>
@@ -97,13 +126,47 @@ public class BankAccount
     }
     // Ключевое слово virtual позволяет в дочернем классе предоставить другую реализацию метода PerformMonthAndTransactions
     /// <summary>
-    /// Метод, который выполняет операции по окончании месяца.
+    /// Метод, который выполняет операции по окончании месяца согласно статусу клиента.
     /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException">Исключение бросается, если статус клиента неизвестен.</exception>
     public virtual void PerformMonthAndTransactions()
     {
-
+        DateTime date = DateTime.UtcNow;
+        switch (Status)
+        {
+            case ClientStatus.Regular:
+                MakeWithdrawal(50m, date, "monthly service fee");
+                break;
+            case ClientStatus.Premium:
+                if (Balance > 10000m)
+                {
+                    decimal interest = (Balance - 10000m) * 0.01m;
+                    MakeDeposite(interest, date, "Premium interest");
+                }
+                break;
+            case ClientStatus.VIP:
+                if (Balance > 10000m)
+                {
+                    decimal interest = (Balance - 10000m) * 0.03m;
+                    MakeDeposite(interest, date, "VIP interest");
+                }
+                decimal cashback = GetMonthlyWithdrawalsSum(date) * 0.05m;
+                if (cashback > 0) MakeDeposite(cashback, date, "VIP cashback");
+                break;
+            default: throw new ArgumentOutOfRangeException(nameof(Status), $"Unknown status: {Status}");
+        }
     }
-    //Переопределяем метод базового класса - класаа object
+    private decimal GetMonthlyWithdrawalsSum(DateTime date)
+    {
+        decimal sum = 0;
+        foreach (var t in _allTransactions)
+        {
+            if (t.Amount < 0 && t.Date.Year == date.Year && t.Date.Month == date.Month)
+                sum += -t.Amount;
+        }
+        return sum;
+    }
+    //Переопределяем метод базового класса - класса object
     // ToString - возвращает строку с информацией об объекте
     /// <summary>
     /// Возвращает строковое представление счёта.
@@ -118,7 +181,7 @@ public class BankAccount
     /// </summary>
     /// <param name="amount">Сумма снятия</param>
     /// <param name="date">Дата операции</param>
-    /// <param name="note">Комментарий к операцие</param>
+    /// <param name="note">Комментарий к операции</param>
     /// <exception cref="ArgumentOutOfRangeException">
     /// Бросается, если <paramref name="amount"/> меньше или равен нулю.
     /// </exception>
@@ -142,8 +205,8 @@ public class BankAccount
         //var withdrawal = new Transaction(-amount, date, note);
         //_allTransactions.Add(withdrawal);
     }
-    //protected - модификатор доступа который означает , что этот метод можно вызывть только из текущего класса и дочернего класса
-    //клиент 9внешний код) данный метод вызвать не может
+    //protected - модификатор доступа который означает , что этот метод можно вызывать только из текущего класса и дочернего класса
+    //клиент внешний код) данный метод вызвать не может
     /// <summary>
     /// Метод, который проверяет допустимо ли превышение лимита снятия
     /// </summary>
@@ -158,7 +221,7 @@ public class BankAccount
         }
         else
         {
-            // default - содержит значение по умолчанию , так как тип возвращаемого знаения - ссылочный, то эта переменная равняется default = null
+            // default - содержит значение по умолчанию , так как тип возвращаемого значения - ссылочный, то эта переменная равняется default = null
             return default; //== return null;
         }
     }
