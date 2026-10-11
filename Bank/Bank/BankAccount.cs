@@ -43,6 +43,7 @@ public class BankAccount
     /// Статус клиента банка. Определяет условия ежемесячного обслуживания.
     /// </summary>
     public ClientStatus Status { get; private set;  }
+    public static AuditLog Audit { get; } = new AuditLog();
     private static int s_accountNumberSeed = 1000000000;
     /// <summary>
     /// Конструктор класса. Создаёт счёт с нулевым минимальным балансом.
@@ -104,6 +105,7 @@ public class BankAccount
         }
         var deposite = new Transaction(amount, date, note);
         _allTransactions.Add(deposite);
+        Audit.Log(Number, "Deposit", amount, date);
     }
     /// <summary>
     /// Метод, который формирует отчет-историю по всем транзакциям счёта.
@@ -136,12 +138,14 @@ public class BankAccount
         {
             case ClientStatus.Regular:
                 MakeWithdrawal(50m, date, "monthly service fee");
+                Audit.Log(Number, "Withdrawal", -50m, date);
                 break;
             case ClientStatus.Premium:
                 if (Balance > 10000m)
                 {
                     decimal interest = (Balance - 10000m) * 0.01m;
                     MakeDeposite(interest, date, "Premium interest");
+                    Audit.Log(Number, "Interest", interest, date);
                 }
                 break;
             case ClientStatus.VIP:
@@ -149,9 +153,14 @@ public class BankAccount
                 {
                     decimal interest = (Balance - 10000m) * 0.03m;
                     MakeDeposite(interest, date, "VIP interest");
+                    Audit.Log(Number, "Interest", interest, date);
                 }
                 decimal cashback = GetMonthlyWithdrawalsSum(date) * 0.05m;
-                if (cashback > 0) MakeDeposite(cashback, date, "VIP cashback");
+                if (cashback > 0)
+                {
+                    MakeDeposite(cashback, date, "VIP cashback");
+                    Audit.Log(Number, "Interest", cashback, date);
+                }
                 break;
             default: throw new ArgumentOutOfRangeException(nameof(Status), $"Unknown status: {Status}");
         }
@@ -192,8 +201,12 @@ public class BankAccount
         Transaction? withdrawal = new(-amount, date, note);
 
         _allTransactions.Add(withdrawal);
+        Audit.Log(Number, "Withdrawal", -amount, date);
         if (overdraftTransaction is not null)
+        {
             _allTransactions.Add(overdraftTransaction);
+            Audit.Log(Number, "Withdrawal", overdraftTransaction.Amount, date);
+        }
         //    if (amount <= 0)
         //{
         //    throw new ArgumentOutOfRangeException(nameof(amount), "Amount of withdrawal be positive");

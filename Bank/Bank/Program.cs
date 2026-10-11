@@ -47,11 +47,12 @@
             lineOfCredit.MakeWithdrawal(600m, DateTime.UtcNow, "credit");
             Console.WriteLine(lineOfCredit.GetAccountHistory());
 
-            // === Проверка задачи 1: статусы ===
-
             var regular = new BankAccount("Иван", 5000m);
             regular.PerformMonthAndTransactions();
-            Console.WriteLine($"Regular: баланс = {regular.Balance}");   // ожидаем 4950
+            Console.WriteLine($"Regular: баланс = {regular.Balance}");
+
+            Console.WriteLine("Журнал аудита");
+            Console.WriteLine(BankAccount.Audit.GetReport());
         }
     }
 }

@@ -23,6 +23,7 @@ public class GiftCardAccount:BankAccount
         if (_monthlyDeposit != 0)
         {
             MakeDeposite(_monthlyDeposit, DateTime.UtcNow, "Add monthly deposit");
+            BankAccount.Audit.Log(Number, "Deposit", _monthlyDeposit, DateTime.UtcNow);
         }
     }
     /// <summary>

@@ -22,6 +22,7 @@ public class LineOfCreditAccount: BankAccount
         {
             decimal interest = -Balance * 0.07m;
             MakeWithdrawal(interest, DateTime.UtcNow, "Charge monthly interest");
+            BankAccount.Audit.Log(Number, "Interest", -interest, DateTime.UtcNow);
         }
     }
     /// <summary>
@@ -30,7 +31,18 @@ public class LineOfCreditAccount: BankAccount
     /// <param name="IsOverdrawn">Признак, того что баланс выходит за границу</param>
     /// <returns>Штраф за превышение (-20), иначе null</returns>
     protected override Transaction? CheckWithDrawalLimit(bool IsOverdrawn)
-        => IsOverdrawn ? new Transaction(-20,DateTime.UtcNow, "apply overdraft") : default;
+    {
+        if (IsOverdrawn)
+        {
+            var t = new Transaction(-20, DateTime.UtcNow, "apply overdraft");
+            BankAccount.Audit.Log(Number, "Withdrawal", t.Amount, t.Date);
+            return t;
+        }
+        else
+        {
+            return default;
+        }
+    }
     //protected override Transaction? CheckWithDrawalLimit(bool IsOverdrawn)
     //{return IsOverdrawn? new Transaction(-20, DateTime.UtcNow, "apply overdraft") : default;}
 }

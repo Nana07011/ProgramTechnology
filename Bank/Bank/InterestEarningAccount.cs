@@ -23,7 +23,7 @@ public class InterestEarningAccount: BankAccount
         {
             decimal interest = Balance * 0.02m;
             MakeDeposite(interest, DateTime.UtcNow, "Apply month interest");
+            BankAccount.Audit.Log(Number, "Interest", interest, DateTime.UtcNow);
         }
-
     }
 }
