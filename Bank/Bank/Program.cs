@@ -53,6 +53,12 @@
 
             Console.WriteLine("Журнал аудита");
             Console.WriteLine(BankAccount.Audit.GetReport());
+
+            var alice = new BankAccount("Алиса", 10000m);
+            var bob = new BankAccount("Боб", 500m);
+            var transferService = new TransferService();
+            transferService.Transfer(alice, bob, 3000m, DateTime.UtcNow, "оплата долга");
+             Console.WriteLine($"После перевода: Алиса = {alice.Balance}, Боб = {bob.Balance}");
         }
     }
 }

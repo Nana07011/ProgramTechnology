@@ -43,6 +43,9 @@ public class BankAccount
     /// Статус клиента банка. Определяет условия ежемесячного обслуживания.
     /// </summary>
     public ClientStatus Status { get; private set;  }
+    /// <summary>
+    /// Журнал аудита, общий для всех счетов.
+    /// </summary>
     public static AuditLog Audit { get; } = new AuditLog();
     private static int s_accountNumberSeed = 1000000000;
     /// <summary>
