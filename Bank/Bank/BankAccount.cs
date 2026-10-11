@@ -11,7 +11,7 @@ public enum ClientStatus
 /// <summary>
 /// Банковский счет, хранящий историю транзакций и баланс
 /// </summary>
-// BankAccount - потомок класса object
+// BankAccount - потомок класса object 
 public class BankAccount
 {
     private readonly decimal _minimumBalance;
