@@ -33,14 +33,6 @@ public class Dairy : Food, IExpirable
     {
     }
     /// <summary>
-    /// Конструктор с названием и сроком годности
-    /// </summary>
-    /// <param name="name">Название продукта</param>
-    /// <param name="expirationDate">Дата истечения срока годности</param>
-    public Dairy(string name, DateTime expirationDate) : this(0, name, 0, expirationDate)
-    {
-    }
-    /// <summary>
     /// Проверяет истек ли срок годности
     /// </summary>
     /// <returns>true, если срок годности истек; иначе false</returns>

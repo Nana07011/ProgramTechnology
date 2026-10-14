@@ -32,13 +32,6 @@ public class Vegetable : Food
     { 
     }
     /// <summary>
-    /// Конструктор с названием
-    /// </summary>
-    /// <param name="name">Название продукта</param>
-    public Vegetable(string name) : this(0, name, 0, false)
-    {
-    }
-    /// <summary>
     /// Употребление овоща
     /// </summary>
     public override void Consume()
