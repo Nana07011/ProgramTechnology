@@ -1,13 +1,7 @@
 ﻿using System.Text;
 
 namespace Bank;
-/// <summary>
-/// Статус клиента банка. Определяет условие ежемесячного обслуживания счета
-/// </summary>
-public enum ClientStatus
-{
-    Regular, Premium, VIP
-}
+
 /// <summary>
 /// Банковский счет, хранящий историю транзакций и баланс
 /// </summary>
