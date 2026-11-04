@@ -1,6 +1,6 @@
 ﻿namespace BankAccounts.Core.Accounts;
 
-internal interface IAccountOperations
+public interface IAccountOperations
 {
     decimal Balance { get; }
     void Deposit(decimal amount, DateTime date, string note);
