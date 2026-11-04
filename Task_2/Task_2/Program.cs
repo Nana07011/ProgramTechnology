@@ -7,7 +7,7 @@ internal class Program
     /// <summary>
     /// Точка входа в программу.
     /// </summary>
-    static void Main()
+    static void Main() 
     {
         List<Food> products = new List<Food>
         {
