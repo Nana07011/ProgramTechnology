@@ -1,5 +1,5 @@
 ﻿namespace GuessNumberGame.GameLogic;
-// Реализация правил игры
+// Реализация правил игры (Отвечает только за правила самой игры)
 public class GuessNumberGameLogic : IGameLogic
 {
     public int MinNumber => 1;

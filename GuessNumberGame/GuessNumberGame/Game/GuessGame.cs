@@ -1,6 +1,6 @@
-﻿using GuessNumberGame.Session;
+﻿
 namespace GuessNumberGame.Game;
-// Реализация игровой партии
+// Реализация игровой партии (Отвечает за запуск игры)
 public class GuessGame : IGame
 {
     private readonly IGameSession _session;

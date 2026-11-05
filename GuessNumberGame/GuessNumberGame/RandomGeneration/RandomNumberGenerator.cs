@@ -1,5 +1,5 @@
 ﻿namespace GuessNumberGame.RandomGeneration;
-// Реализация генератора случайных чисел
+// Реализация генератора случайных чисел (Отвечает за генерацию чисел, есть свой интерфейс)
 public class RandomNumberGenerator : IRandomNumberGenerator
 {
     private readonly Random _random = new();

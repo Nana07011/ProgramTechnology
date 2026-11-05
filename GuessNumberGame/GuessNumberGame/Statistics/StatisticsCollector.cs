@@ -1,5 +1,5 @@
 ﻿namespace GuessNumberGame.Statistics;
-// Подсчет для общей статистики
+// Подсчет для общей статистики (Отвечает только за статистику игры, подсчет)
 public class StatisticsCollector : IStatisticsCollector
 {
     private int _min = int.MaxValue;

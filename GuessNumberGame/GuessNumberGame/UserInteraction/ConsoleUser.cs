@@ -1,5 +1,5 @@
 ﻿namespace GuessNumberGame.UserInteraction;
-// Класс работы с консолью
+// Класс работы с консолью (Отвечает за ввод/вывод, можно выводить за консоль(GUI))
 public class ConsoleUser : IUserInput, IUserOutput
 {
     public string ReadLine()
