@@ -3,6 +3,6 @@ internal class program
 {
     static void Main()
     {
-        Console.WriteLine("Base of the game");
+        Console.WriteLine("Base of the game is done");
     }
 }
