@@ -9,4 +9,4 @@ internal class HardLevel : IDifficultyLevel
     public int MaxNumber => 100;
 
     public int MaxAttempts => 5;
-}
+} 
