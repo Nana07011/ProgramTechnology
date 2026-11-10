@@ -1,19 +1,23 @@
-﻿namespace GuessGameProgram.Statistics;
+﻿using GuessGameProgram.UserInteraction;
+
+namespace GuessGameProgram.Statistics;
 
 public class StatisticsView
 {
     private readonly IStatisticsFile _statisticsfile;
+    private readonly IOutput _output;
 
-    public StatisticsView(IStatisticsFile statisticsfile)
+    public StatisticsView(IStatisticsFile statisticsfile, IOutput output)
     {
         _statisticsfile = statisticsfile ?? throw new ArgumentNullException(nameof(statisticsfile));
+        _output = output ?? throw new ArgumentNullException(nameof(output));
     }
     public void PrintStatistics()
     {
         var results = _statisticsfile.GetResults();
         if (results.Count == 0)
         {
-            Console.WriteLine("Статистика пуста");
+            _output.WriteLine("Статистика пуста");
             return;
         }
         int totalGames = results.Count;
@@ -27,9 +31,9 @@ public class StatisticsView
         int losses = totalGames - wins;
         double avgWin = ((double)wins / totalGames) * 100;
 
-        Console.WriteLine("Всего игр: " + totalGames);
-        Console.WriteLine("Количество побед: " + wins);
-        Console.WriteLine("Количество поражений: " + losses);
-        Console.WriteLine("Процент побед: " + avgWin.ToString("F1") + "%");
+        _output.WriteLine("Всего игр: " + totalGames);
+        _output.WriteLine("Количество побед: " + wins);
+        _output.WriteLine("Количество поражений: " + losses);
+        _output .WriteLine("Процент побед: " + avgWin.ToString("F1") + "%");
     }
 }
