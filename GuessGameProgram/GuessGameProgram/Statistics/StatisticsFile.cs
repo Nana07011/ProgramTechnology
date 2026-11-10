@@ -1,10 +1,10 @@
 ﻿namespace GuessGameProgram.Statistics;
 
-public class StatisticsOfTheGame : IStatisticsFile
+public class StatisticsFile : IStatisticsFile
 {
     private readonly string _file;
 
-    public StatisticsOfTheGame(string file = "statistics.txt")
+    public StatisticsFile(string file = "statistics.txt")
     {
         _file = file ?? throw new ArgumentNullException(nameof(file));
     }
