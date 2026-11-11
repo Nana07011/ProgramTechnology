@@ -26,7 +26,7 @@ public class GuessGame
     {
         int hiddenNumber = _randomNumber.Next(_difficulty.MinNumber, _difficulty.MaxNumber);
         int attempts = 0;
-        bool isWin = 0;
+        bool isWin = false;
 
         while (attempts < _difficulty.MaxAttempts)
         {
@@ -47,7 +47,7 @@ public class GuessGame
             }
             else
             {
-                _gameEvents.OnGuessMade(guess, hint, _difficulty.MaxAttempts - attempts)
+                _gameEvents.OnGuessMade(guess, hint, _difficulty.MaxAttempts - attempts);
             }
         }
         if (!isWin)
