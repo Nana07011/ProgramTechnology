@@ -12,7 +12,7 @@ internal class CustomLevel : IDifficultyLevel
 
     public CustomLevel(int minNumber, int maxNumber, int maxAttempts)
     {
-        if (minNumber >= MaxNumber)
+        if (minNumber >= maxNumber)
             throw new ArgumentException("Минимальное число должно быть меньше максимального");
         if(maxAttempts <= 0)
             throw new ArgumentException("Количество попыток должно быть положительным");
