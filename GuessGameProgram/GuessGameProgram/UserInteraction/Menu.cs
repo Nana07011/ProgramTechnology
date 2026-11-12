@@ -57,7 +57,7 @@ public class Menu
                 }
                 return new CustomLevel(min, max, attempts);
             default:
-                _output.WriteLine("Неверный ввод. Выюран уровень по умолчанию - средний");
+                _output.WriteLine("Неверный ввод. Выбран уровень по умолчанию - средний");
                 return new MediumLevel();
         }
     }

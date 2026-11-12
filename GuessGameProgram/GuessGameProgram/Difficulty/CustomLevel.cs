@@ -1,6 +1,6 @@
 ﻿namespace GuessGameProgram.Difficulty;
 
-internal class CustomLevel : IDifficultyLevel
+public class CustomLevel : IDifficultyLevel
 {
     public string Level => "Пользовательский";
 

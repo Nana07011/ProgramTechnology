@@ -1,4 +1,4 @@
-﻿namespace GuessGame.BaseOfGame;
+﻿namespace GuessGameProgram.BaseOfTheGame;
 // Перечисление Подсказок для игры
 public enum GuessResultHint
 {

@@ -1,4 +1,4 @@
-﻿using GuessGame.BaseOfGame;
+﻿using GuessGameProgram.BaseOfTheGame;
 using GuessGameProgram.UserInteraction;
 
 namespace GuessGameProgram.Events;

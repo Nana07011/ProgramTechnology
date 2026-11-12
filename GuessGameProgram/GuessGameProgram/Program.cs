@@ -1,4 +1,4 @@
-﻿using GuessGame.BaseOfGame;
+﻿using GuessGameProgram.BaseOfTheGame;
 using GuessGameProgram.Difficulty;
 using GuessGameProgram.Events;
 using GuessGameProgram.Game;
@@ -28,7 +28,7 @@ internal class Program
             output.WriteLine("2. Посмотреть статистику");
             output.WriteLine("3. Выход");
 
-            string choice = Console.ReadLine();
+            string choice = input.ReadLine();
 
             switch(choice)
             {

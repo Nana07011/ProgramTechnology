@@ -20,14 +20,14 @@ public class StatisticsFile : IStatisticsFile
         foreach (string line in lines)
         {
             string[] split = line.Split(';');
-            if (split.Length == 3)
-            {
-                string difficulty = split[0];
-                bool isWin = bool.Parse(split[1]);
-                int attempts = int.Parse(split[2]);
+            if (split.Length != 3) continue;
 
-                results.Add(new GameResult(difficulty, isWin, attempts));
-            }
+            string difficulty = split[0];
+
+            if (!bool.TryParse(split[1], out bool isWin)) continue;
+            if (!int.TryParse(split[2], out int attempts)) continue;
+
+            results.Add(new GameResult(difficulty, isWin, attempts));
         }
         return results;
     }

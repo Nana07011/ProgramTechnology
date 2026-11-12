@@ -1,4 +1,4 @@
-﻿namespace GuessGame.BaseOfGame;
+﻿namespace GuessGameProgram.BaseOfTheGame;
 // Интерфейс для сравнения числа игрока с загаданным
 public interface IGameHintLogic
 {

@@ -1,4 +1,4 @@
-﻿namespace GuessGame.BaseOfGame;
+﻿namespace GuessGameProgram.BaseOfTheGame;
 // Реализация основной логики игры, подсказки больше/меньше и правильное число
 public class GameHintLogic : IGameHintLogic
 {

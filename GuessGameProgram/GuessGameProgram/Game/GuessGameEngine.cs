@@ -1,4 +1,4 @@
-﻿using GuessGame.BaseOfGame;
+﻿using GuessGameProgram.BaseOfTheGame;
 using GuessGameProgram.Difficulty;
 using GuessGameProgram.Events;
 using GuessGameProgram.UserInteraction;

@@ -1,6 +1,6 @@
 ﻿namespace GuessGameProgram.Difficulty;
 
-internal class HardLevel : IDifficultyLevel
+public class HardLevel : IDifficultyLevel
 {
     public string Level => "Сложный";
 

@@ -1,4 +1,4 @@
-﻿namespace GuessGame.BaseOfGame;
+﻿namespace GuessGameProgram.BaseOfTheGame;
 // Реализация генерации числа
 public class RandomNumberGenerator : IRandomNumberGenerator
 {
@@ -10,7 +10,7 @@ public class RandomNumberGenerator : IRandomNumberGenerator
     public int Next(int minNumber, int maxNumber)
     {
         if (minNumber >= maxNumber)
-            throw new ArgumentOutOfRangeException(nameof(minNumber), "min must be less than max");
+            throw new ArgumentOutOfRangeException(nameof(minNumber), "Минимальное число должно быть меньше положительного");
 
         return _random.Next(minNumber, maxNumber + 1);
     }
