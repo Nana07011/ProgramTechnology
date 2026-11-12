@@ -1,3 +1,6 @@
 <Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GuessGame/GuessGame.csproj" Id="7ad1394c-4d06-4146-90e7-233c546859b4" />
+  </Folder>
   <Project Path="GuessGameProgram/GuessGameProgram.csproj" />
 </Solution>
