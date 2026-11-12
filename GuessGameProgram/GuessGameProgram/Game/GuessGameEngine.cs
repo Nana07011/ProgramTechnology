@@ -31,11 +31,24 @@ public class GuessGameEngine
 
         while (AttemptsUsed < _difficulty.MaxAttempts)
         {
-            string input = _input.ReadLine();
+            int guess = 0;
+            bool isValid = false;
 
-            if (!int.TryParse(input, out int guess))
+            for (int i = 0; i < 3; i++)
             {
-                continue;
+                string input = _input.ReadLine();
+
+                if (int.TryParse(input, out guess))
+                {
+                    isValid = true;
+                    break;
+                }
+            }
+
+            if (!isValid)
+            {
+                _gameEvents.OnGameFinish(hiddenNumber, AttemptsUsed, false);
+                return false;
             }
 
             AttemptsUsed++;
