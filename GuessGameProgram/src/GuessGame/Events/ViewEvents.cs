@@ -9,7 +9,8 @@ public class ViewEvents
 
     public ViewEvents(IOutput output, GameEvents gameEvents)
     {
-        _output = output;
+        _output = output ?? throw new ArgumentNullException(nameof(output));
+        if (gameEvents is null) throw new ArgumentNullException(nameof(gameEvents));
 
         gameEvents.GuessMade += OnGuessMade;
         gameEvents.GameFinish += OnGameFinish;
@@ -27,9 +28,9 @@ public class ViewEvents
         }
     }
 
-    private void OnGuessMade(object? sender, UserGameEvents e)
+    protected virtual void OnGuessMade(object? sender, UserGameEvents e)
     {
-        string hintText = e.Hint == GuessResultHint.Greater? "Число больше" : "Число меньше";
-        _output.WriteLine($"Подсказка : { hintText }. Осталось попыток: {e.AttemptsLeft}");
+        string hintText = e.Hint == GuessResultHint.Greater ? "Число больше" : "Число меньше";
+        _output.WriteLine($"Подсказка : {hintText}. Осталось попыток: {e.AttemptsLeft}");
     }
 }

@@ -47,7 +47,7 @@ public class GuessGameEngine
 
             if (!isValid)
             {
-                _gameEvents.OnGameFinish(hiddenNumber, AttemptsUsed, false);
+                _gameEvents.RaiseGameFinish(hiddenNumber, AttemptsUsed, false);
                 return false;
             }
 
@@ -56,17 +56,17 @@ public class GuessGameEngine
             if(hint == GuessResultHint.Correct)
             {
                 isWin = true;
-                _gameEvents.OnGameFinish(hiddenNumber, AttemptsUsed, true);
+                _gameEvents.RaiseGameFinish(hiddenNumber, AttemptsUsed, true);
                 break;
             }
             else
             {
-                _gameEvents.OnGuessMade(guess, hint, _difficulty.MaxAttempts - AttemptsUsed);
+                _gameEvents.RaiseGuessMade(guess, hint, _difficulty.MaxAttempts - AttemptsUsed);
             }
         }
         if (!isWin)
         {
-            _gameEvents.OnGameFinish(hiddenNumber, AttemptsUsed, false);
+            _gameEvents.RaiseGameFinish(hiddenNumber, AttemptsUsed, false);
         }
         return isWin;
     }
