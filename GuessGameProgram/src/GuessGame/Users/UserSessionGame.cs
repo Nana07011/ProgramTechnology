@@ -1,5 +1,5 @@
 ﻿namespace GuessGame.Users;
-
+// SRP. Отвечает за состояние сессии игры
 public class UserSessionGame
 {
     public User? CurrentUser { get; private set;  }

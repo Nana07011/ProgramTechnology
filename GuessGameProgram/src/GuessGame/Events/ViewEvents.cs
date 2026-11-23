@@ -2,7 +2,8 @@
 using GuessGameProgram.UserInteraction;
 
 namespace GuessGameProgram.Events;
-
+// SRP и DIP. Только выводит уведомление
+// зависит от IOutput, а не Console.Writeline
 public class ViewEvents
 {
     private readonly IOutput _output;

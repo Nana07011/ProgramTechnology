@@ -1,5 +1,5 @@
 ﻿namespace GuessGameProgram.Events;
-
+// SRP. Хранит данные для финиша игры для ViewEvents.
 public class GameFinishEvents : EventArgs
 {
     public int SecretNumber { get; }

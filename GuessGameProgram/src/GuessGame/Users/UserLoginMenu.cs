@@ -1,7 +1,8 @@
 ﻿using GuessGameProgram.UserInteraction;
 
 namespace GuessGame.Users;
-
+// SRP и DIP. Отвечает за общение с игроком
+// зависит от интерфейсов, можно тестировать без консоли
 public class UserLoginMenu
 {
     private readonly IUserLogin _userLogin;

@@ -1,7 +1,7 @@
 ﻿using GuessGameProgram.BaseOfTheGame;
 
 namespace GuessGameProgram.Events;
-
+// SRP. Хранит данные игры для ViewEvents.
 public class UserGameEvents : EventArgs
 {
     public int Guess { get; }

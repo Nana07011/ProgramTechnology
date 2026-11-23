@@ -1,5 +1,6 @@
 ﻿namespace GuessGame.Users;
-
+// SRP и DIP. Отвечает только за работу с файлами
+// подстраивается под интерфейс
 public class UserRepository : IUserRepository
 {
     private readonly string _file;

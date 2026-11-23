@@ -1,7 +1,9 @@
 ﻿using GuessGameProgram.UserInteraction;
 
 namespace GuessGameProgram.Statistics;
-
+// SRP и DIP. Задача класса аналитика файла
+// Класс принимает интерфейс, ему все равно откуда берутся данные.
+// Можно работать с файлами, но и написать с базой данных
 public class StatisticsView
 {
     private readonly IStatisticsFile _statisticsfile;

@@ -1,5 +1,7 @@
 ﻿namespace GuessGameProgram.Statistics;
-
+// SRP и OCP. Класс взаимодействует только с файловой системой
+// Класс открыт для расширения но закрыт для изменения
+// (Многопользовательская статистика)
 public class StatisticsFile : IStatisticsFile
 {
     private readonly string _file;

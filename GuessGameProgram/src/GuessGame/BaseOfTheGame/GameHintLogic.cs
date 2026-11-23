@@ -1,5 +1,5 @@
 ﻿namespace GuessGameProgram.BaseOfTheGame;
-// Реализация основной логики игры, подсказки больше/меньше и правильное число
+// SRP. Класс отвечает за одну задачу - сравнение чисел. Он не знает откуда они и что с ними будет.
 public class GameHintLogic : IGameHintLogic
 {
     public GuessResultHint GetHint(int secret, int guess)

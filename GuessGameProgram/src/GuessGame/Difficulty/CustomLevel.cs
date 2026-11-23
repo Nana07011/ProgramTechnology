@@ -1,5 +1,6 @@
 ﻿namespace GuessGameProgram.Difficulty;
-
+// OCP. Если нужно добавить новую сложность, класс не меняется,
+// создается новый
 public class CustomLevel : IDifficultyLevel
 {
     public string Level => "Пользовательский";

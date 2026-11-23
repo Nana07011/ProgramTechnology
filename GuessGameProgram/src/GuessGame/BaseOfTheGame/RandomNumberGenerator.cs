@@ -1,5 +1,5 @@
 ﻿namespace GuessGameProgram.BaseOfTheGame;
-// Реализация генерации числа
+// DIP и SRP. Класс не создает new Random, а получает его. Также единная ответственность
 public class RandomNumberGenerator : IRandomNumberGenerator
 {
     private readonly Random _random;

@@ -1,5 +1,5 @@
 ﻿using GuessGameProgram.UserInteraction;
-
+// SRP Отвечает только за логин.
 namespace GuessGame.Users;
 
 public class UserLogin : IUserLogin

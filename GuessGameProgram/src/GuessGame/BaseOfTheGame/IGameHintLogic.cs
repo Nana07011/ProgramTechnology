@@ -1,5 +1,5 @@
 ﻿namespace GuessGameProgram.BaseOfTheGame;
-// Интерфейс для сравнения числа игрока с загаданным
+// DIP и ISP. Узкий интерфейс, клиентам не навязываются лишние методы.
 public interface IGameHintLogic
 {
     GuessResultHint GetHint(int secret, int guess);

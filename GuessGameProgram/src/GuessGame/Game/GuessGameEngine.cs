@@ -4,7 +4,8 @@ using GuessGameProgram.Events;
 using GuessGameProgram.UserInteraction;
 
 namespace GuessGameProgram.Game;
-
+// SRP и DIP. Только управляет игрой
+// зависит от интерфейсов, классу передают готовое
 public class GuessGameEngine
 {
     private readonly IRandomNumberGenerator _randomNumber;

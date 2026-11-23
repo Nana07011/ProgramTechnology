@@ -1,7 +1,7 @@
 ﻿using GuessGameProgram.BaseOfTheGame;
 
 namespace GuessGameProgram.Events;
-
+// OCP. Протектед и Публичные методы, можно переопределить и безопасно вызвать.
 public class GameEvents
 {
     public event EventHandler<UserGameEvents>? GuessMade;

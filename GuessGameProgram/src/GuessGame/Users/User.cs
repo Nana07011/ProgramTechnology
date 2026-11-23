@@ -1,5 +1,5 @@
 ﻿namespace GuessGame.Users;
-
+// SRP. Класс отвечает только за хранение данных игрока
 public class User
 {
     public Guid Id { get; }

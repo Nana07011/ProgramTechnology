@@ -1,5 +1,7 @@
 ﻿namespace GuessGameProgram.BaseOfTheGame;
-// Интерфейс для генерации случайного числа между мин и макс значением
+// DIP и SRP. Позволяет подменить генератор.
+// Можно использовать для тестов, написать класс,
+// возвращающий конкретное число для примера
 public interface IRandomNumberGenerator
 {
     int Next(int minNumber, int maxNumber);

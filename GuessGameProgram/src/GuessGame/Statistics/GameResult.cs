@@ -1,5 +1,5 @@
 ﻿namespace GuessGameProgram.Statistics;
-
+// SRP. Хранит данные результата игры
 public class GameResult
 {
     public string DifficultyLevel { get; set; } = string.Empty;

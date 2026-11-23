@@ -1,7 +1,7 @@
 ﻿using GuessGameProgram.Difficulty;
 
 namespace GuessGameProgram.UserInteraction;
-
+// SRP. Реализация меню
 public class Menu
 {
     private readonly IOutput _output;
