@@ -44,6 +44,7 @@ public class GuessGameEngine
                 {
                     if (guess < _difficulty.MinNumber || guess > _difficulty.MaxNumber){
                         _output.WriteLine($"Введите число от {_difficulty.MinNumber} до {_difficulty.MaxNumber}.");
+                        continue;
                     }
                     isValid = true;
                     break;
