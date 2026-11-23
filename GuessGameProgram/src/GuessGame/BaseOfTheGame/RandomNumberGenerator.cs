@@ -10,7 +10,7 @@ public class RandomNumberGenerator : IRandomNumberGenerator
     public int Next(int minNumber, int maxNumber)
     {
         if (minNumber >= maxNumber)
-            throw new ArgumentOutOfRangeException(nameof(minNumber), "Минимальное число должно быть меньше положительного");
+            throw new ArgumentOutOfRangeException(nameof(minNumber), "Минимальное число должно быть меньше максимального");
 
         return _random.Next(minNumber, maxNumber + 1);
     }

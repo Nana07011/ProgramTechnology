@@ -12,15 +12,17 @@ public class GuessGameEngine
     private readonly IDifficultyLevel _difficulty;
     private readonly IInput _input;
     private readonly GameEvents _gameEvents;
+    private readonly IOutput _output;
     public int AttemptsUsed { get; private set; }
 
-    public GuessGameEngine(IRandomNumberGenerator randomNumber, IGameHintLogic hintLogic, IDifficultyLevel difficulty, IInput input, GameEvents gameEvents)
+    public GuessGameEngine(IRandomNumberGenerator randomNumber, IGameHintLogic hintLogic, IDifficultyLevel difficulty, IInput input, GameEvents gameEvents, IOutput output)
     {
         _randomNumber = randomNumber;
         _hintLogic = hintLogic;
         _difficulty = difficulty;
         _input = input;
         _gameEvents = gameEvents;
+        _output = output;
     }
 
     public bool Play()
@@ -40,6 +42,9 @@ public class GuessGameEngine
 
                 if (int.TryParse(input, out guess))
                 {
+                    if (guess < _difficulty.MinNumber || guess > _difficulty.MaxNumber){
+                        _output.WriteLine($"Введите число от {_difficulty.MinNumber} до {_difficulty.MaxNumber}.");
+                    }
                     isValid = true;
                     break;
                 }

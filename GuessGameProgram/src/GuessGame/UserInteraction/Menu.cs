@@ -50,7 +50,7 @@ public class Menu
                     _output.WriteLine("Ошибка! Выбраны настройки по умолчанию (7)");
                     return new MediumLevel();
                 }
-                if (min > max)
+                if (min >= max)
                 {
                     _output.WriteLine("Ошибка! Минимальное число должно быть меньше максимального. Выбраны настройки по умолчанию (1-50).");
                     return new MediumLevel();
