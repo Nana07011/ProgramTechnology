@@ -34,7 +34,7 @@ internal class Program
             {
                 case "1":
                     IDifficultyLevel level = menu.ChooseDifficulty();
-                    GuessGameEngine game = new GuessGameEngine(generator, hintLogic, level, input, gameEvents);
+                    GuessGameEngine game = new GuessGameEngine(generator, hintLogic, level, input, gameEvents, output);
                     output.WriteLine($"Загадано число от {level.MinNumber} до {level.MaxNumber}. У вас {level.MaxAttempts} попыток. Попробуйте угадать. ");
                     bool isWin = game.Play();
                     statisticsFile.SaveResultsOnFile(new GameResult(level.Level, isWin, game.AttemptsUsed));
