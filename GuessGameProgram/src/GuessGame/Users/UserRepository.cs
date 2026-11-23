@@ -4,7 +4,7 @@ public class UserRepository : IUserRepository
 {
     private readonly string _file;
 
-    public UserRepository(string file)
+    public UserRepository(string file = "users.txt")
     {
         _file = file;
     }

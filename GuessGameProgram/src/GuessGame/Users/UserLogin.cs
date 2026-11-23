@@ -26,7 +26,7 @@ public class UserLogin : IUserLogin
     {
         if (string.IsNullOrWhiteSpace(username)) 
             throw new ArgumentException("Имя пользователя не может быть пустым.");
-        if (string.IsNullOrWhiteSpace(username))
+        if (string.IsNullOrWhiteSpace(password))
             throw new ArgumentException("Пароль не может быть пустым.");
         username = username.Trim();
         if (username.Contains(";") || username.Contains("\n"))
