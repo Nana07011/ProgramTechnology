@@ -11,9 +11,9 @@ public class UserLoginMenu
 
     public UserLoginMenu(IUserLogin userLogin, IOutput output, IInput input)
     {
-        _userLogin = userLogin;
-        _output = output;
-        _input = input;
+        _userLogin = userLogin ?? throw new ArgumentNullException(nameof(userLogin));
+        _output = output ?? throw new ArgumentNullException(nameof(output));
+        _input = input ?? throw new ArgumentNullException(nameof(input));
     }
     public User? Authorize()
     {
@@ -37,7 +37,7 @@ public class UserLoginMenu
                 return user;
             }
 
-            _output.WriteLine("Вас нет в списке. Создать аккаунт?");
+            _output.WriteLine("Неверное имя пользователя или пароль. Создать аккаунт?");
             _output.WriteLine("1. Да");
             _output.WriteLine("2. Нет");
 

@@ -27,10 +27,9 @@ internal class Program
 
         if (user is null) return;
         userSession.Login(user);
-        output.WriteLine("Вы вошли как: " + user.UserName);
 
-        IStatisticsFile statisticsFile = new StatisticsFile("statistics_" + user.Id + ".txt");
-        StatisticsView statisticsVies = new StatisticsView(statisticsFile, output);
+        IStatisticsFile statisticsFile = new StatisticsFile("statistics_" + user.UserName + ".txt");
+        StatisticsView statisticsView = new StatisticsView(statisticsFile, output);
 
         GameEvents gameEvents = new GameEvents();
         ViewEvents viewEvents = new ViewEvents(output, gameEvents);
@@ -56,7 +55,7 @@ internal class Program
                     input.ReadLine();
                     break;
                 case "2":
-                    statisticsVies.PrintStatistics();
+                    statisticsView.PrintStatistics();
                     output.WriteLine("Нажмите Enter, чтобы вернуться в меню.");
                     input.ReadLine();
                     break;
@@ -70,7 +69,7 @@ internal class Program
                     output.WriteLine("Вы вошли как: " + user.UserName);
 
                     statisticsFile = new StatisticsFile("statistics_" + user.Id + ".txt");
-                    statisticsVies = new StatisticsView(statisticsFile, output);
+                    statisticsView = new StatisticsView(statisticsFile, output);
                     break;
                 case "4":
                     return;
