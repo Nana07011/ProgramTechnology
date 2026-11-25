@@ -17,7 +17,7 @@ public class ViewEvents
         gameEvents.GameFinish += OnGameFinish;
     }
 
-    private void OnGameFinish(object? sender, GameFinishEvents e)
+    protected virtual void OnGameFinish(object? sender, GameFinishEvents e)
     {
         if (e.IsWin)
         {
